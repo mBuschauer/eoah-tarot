@@ -1,0 +1,42 @@
+/* Establish a 3D perspective on the wrapper */
+.card-container {
+  perspective: 1000px;
+  width: 300px;
+  height: auto; /* will grow to image height */
+}
+
+/* The flipper holds front + back, and will rotate */
+.card-flipper {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-out;
+}
+
+/* When flipped, rotate the flipper 180° */
+.card-flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Each face sits on top of each other */
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  /* Back face shows initially (no extra styling needed) */
+  /* could add a border or shadow here if you like */
+}
+
+/* Front face is rotated so it faces away until flipped */
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card-flipper.no-transition {
+  transition: none !important;
+}

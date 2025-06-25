@@ -1,72 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { getDeck, getCard, spliceShuffle, stackSuffle, riffleShuffle, renderKeywords } from '../utils/scripts.jsx';
-import { Button, Box, Typography } from '@mui/material';
+import { getDeckOptions, getDeck, getCard, spliceShuffle, stackSuffle, riffleShuffle, renderKeywords } from '../utils/scripts.jsx';
+import Card from './Card.jsx'
+import CardDescripition from './CardDescription.jsx';
+import './SingleCard.css'
 
 const SingleCard = () => {
+  const options = getDeckOptions()
+  const [selectedDeck, setSelectedDeck] = useState(options[0])
+  // State to hold the current tarot deck
   const [tarotDeck, setTarotDeck] = useState(null);
+  // State to hold the currently drawn card
   const [card, setCard] = useState(null);
 
+  // initialize (or re-init) whenever selectedDeck changes
   useEffect(() => {
-    if (!tarotDeck) {
-      setTarotDeck(getDeck());
-    }
-  }, [tarotDeck]);
+    setTarotDeck(getDeck(selectedDeck.key))
+    setCard(null)
+  }, [selectedDeck])
 
+  // Applies a combination of shuffling methods to randomize the tarot deck
   const shuffle = () => {
     let deck = riffleShuffle(tarotDeck);
     deck = spliceShuffle(deck);
     deck = stackSuffle(deck);
-    setTarotDeck(deck);
+    setTarotDeck(deck); // Updates the shuffled deck in state
   };
 
+  // Draws a single card from the current deck
   const getThisCard = () => {
-    setCard(getCard(tarotDeck));
+    setCard(getCard(tarotDeck)); // Randomly selects a card from the deck
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 3 }}>
-        <Button variant="contained" onClick={() => { setCard(null); shuffle(); }}>
-          Shuffle
-        </Button>
-        <Button variant="contained" onClick={getThisCard}>
-          Draw Card
-        </Button>
-        <Button variant="contained" onClick={() => { setTarotDeck(getDeck()); setCard(null); }}>
-          Reset
-        </Button>
-      </Box>
-
-      {card ? (
-        <Box className="single_card" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-          <img className="card-image" src={`images/cards/${card.img}`} alt={card.name} style={{ maxWidth: '300px' }} />
-          <Box className="card-details" sx={{ maxWidth: '600px' }}>
-            <Typography variant="h5" sx={{ mb: 1 }}>{card.number}: {card.name}</Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>Keywords: {renderKeywords(card)}</Typography>
-
-            <Box className="meaning" sx={{ mb: 2 }}>
-              <Typography variant="subtitle1">Light:</Typography>
-              <ul>{card.meanings.light.map(item => <li key={item}>{item}</li>)}</ul>
-            </Box>
-
-            <Box className="meaning" sx={{ mb: 2 }}>
-              <Typography variant="subtitle1">Shadow:</Typography>
-              <ul>{card.meanings.shadow.map(item => <li key={item}>{item}</li>)}</ul>
-            </Box>
-
-            <Box className="meaning">
-              <Typography variant="subtitle1">Questions to Ask Yourself:</Typography>
-              <ul>{card.QuestionsToAsk.map(item => <li key={item}>{item}</li>)}</ul>
-            </Box>
-          </Box>
-        </Box>
-      ) : (
-        <Typography variant="body1" sx={{ mt: 2 }}>
-          Cards are in order by default; Shuffle and Draw a Card.
-        </Typography>
-      )}
-    </Box>
+    <>
+      <div>
+        <button onClick={() => { setCard(null); shuffle(); }}>Shuffle</button>
+        <button onClick={getThisCard}>Draw Card</button>
+        <button onClick={() => { setTarotDeck(getDeck(selectedDeck.key)); setCard(null); }}>Reset</button>
+        <label> Deck:
+          <select value={selectedDeck.key} onChange={e => setSelectedDeck(options.find(o => o.key === e.target.value)) } >
+            {options.map(o => ( <option key={o.key} value={o.key}>{o.label}</option> ))}
+          </select>
+        </label>
+      </div>
+      <p className="deck-description">{selectedDeck.description}</p>
+      <div className="single-card">
+        {card ? (<><Card card={card} imageFolder={selectedDeck.imageFolder} /> <CardDescripition card={card} /></>) : (<p>Cards are in order by default; Shuffle and Draw a Card.</p>)}
+      </div>
+    </>
   );
 };
+
 
 export default SingleCard;

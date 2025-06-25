@@ -9,6 +9,6 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
-    # npm install
+    npm install
   '';
 }

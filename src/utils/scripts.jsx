@@ -1,9 +1,11 @@
-import Tarot from '../data/datasets_tarot-images.json';
+import { deckList } from './decks'
 
+export const getDeckOptions = () => deckList;
 
-export const getDeck = () => {
-    const deck = Object.values(Tarot.cards);
-    return deck;
+// look up by key, falling back to the first one
+export const getDeck = (deckKey = deckList[0].key) => {
+  const deckObj = deckList.find(d => d.key === deckKey) || deckList[0]
+  return Object.values(deckObj.data)
 }
 
 // Fisher-Yates Shuffle

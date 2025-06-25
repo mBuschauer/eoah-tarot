@@ -1,0 +1,8 @@
+.single-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: center;
+  gap: 24px;
+  height: 100%
+}
