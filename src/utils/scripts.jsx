@@ -72,15 +72,26 @@ export const renderKeywords = (card) => {
 }
 
 export const getCard = (deck) => {
-    // nothing to draw
+    // nothing to draw - just bail out
     if (!deck || deck.length === 0) return null;
 
-    // move the current top card to the bottom
-    const firstCard = deck.splice(0, 1)[0];
-    deck.push(firstCard);
+    // take the top card
+    const [card] = deck.splice(0, 1);
 
-    // return the new top card
-    return deck[0];
+    // and put it on the bottom so the deck never empties
+    deck.push(card);
+
+    return card;
+};
+
+export const getTopFive = (deck, n = 5) => {
+  if (!deck || deck.length === 0) return [];
+  const count = Math.min(n, deck.length);
+  // remove the top `count` cards
+  const topFive = deck.splice(0, count);
+  // push only the first card back onto the bottom
+  if (topFive.length > 0) deck.push(topFive[0]);
+  return topFive;
 };
 
 export const getSpread = (deck, num) => {

@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
-
-const Card = ({ card, imageFolder }) => {
+export const Card = ({ card, imageFolder, top = false }) => {
   const [flipped, setFlipped] = useState(false);
   const [disableTransition, setDisableTransition] = useState(false);
 
   useEffect(() => {
-    // reset flip state without transition, then flip
     setDisableTransition(true);
     setFlipped(false);
+
     const timer = setTimeout(() => {
       setDisableTransition(false);
-      setFlipped(true);
-    }, 100);
+      if (top) setFlipped(true);
+    }, 400);
+
     return () => clearTimeout(timer);
-  }, [card]);
+  }, [card, top]);
 
   return (
     <div className="card-container">
-      <div className={`card-flipper ${flipped ? 'flipped' : ''} ${disableTransition ? 'no-transition' : ''}`}>
+      <div
+        className={`card-flipper ${flipped ? 'flipped' : ''} ${
+          disableTransition ? 'no-transition' : ''
+        }`}
+      >
         <img
           className="card-face card-back"
           src={`./images/${imageFolder}/tarot-card-back.JPG`}
@@ -33,5 +37,3 @@ const Card = ({ card, imageFolder }) => {
     </div>
   );
 };
-
-export default Card;

@@ -54,9 +54,9 @@ const CardDescripition = ({ card, deck }) => {
     <AnimatePresence mode="wait">
       <motion.div
         key={`${deck.key}-${card.name}`}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
       >
         {content}

@@ -3,6 +3,7 @@
   perspective: 1000px;
   width: 300px;
   height: auto; /* will grow to image height */
+  position: relative;
 }
 
 /* The flipper holds front + back, and will rotate */
@@ -26,11 +27,14 @@
   width: 100%;
   height: 512px;
   backface-visibility: hidden;
+  border-radius: 10px;
+
+  -webkit-user-drag: none; /* Specifically for Safari and Chrome */
+  pointer-events: none; /* Optional: prevents mouse events like drag */
 }
 
 .card-back {
-  /* Back face shows initially (no extra styling needed) */
-  /* could add a border or shadow here if you like */
+  border-radius: 10px;
 }
 
 /* Front face is rotated so it faces away until flipped */

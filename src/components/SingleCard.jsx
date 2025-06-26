@@ -1,112 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import {
-  getDeckOptions,
-  getDeck,
-  getCard,
-  spliceShuffle,
-  stackSuffle,
-  riffleShuffle,
-} from '../utils/scripts.jsx';
-import Card from './Card.jsx';
+import { getDeckOptions, getDeck, getCard, spliceShuffle, stackSuffle, riffleShuffle, renderKeywords } from '../utils/scripts.jsx';
 import CardDescripition from './CardDescription.jsx';
-import './SingleCard.css';
-
-const STORAGE_KEY = 'selectedDeck';
-const ORDER_KEY = key => `tarotDeckOrder-${key}`;
+import './SingleCard.css'
+import DeckStack from './DeckStack.jsx';
 
 const SingleCard = () => {
-  const options = getDeckOptions();
-
-  // Load selectedDeck (persisted) or default
-  const [selectedDeck, setSelectedDeck] = useState(() => {
-    const savedKey = localStorage.getItem(STORAGE_KEY);
-    return options.find(o => o.key === savedKey) || options[0];
-  });
-
-  // Deck state + drawn card
-  const [tarotDeck, setTarotDeck] = useState([]);
+  const options = getDeckOptions()
+  const [selectedDeck, setSelectedDeck] = useState(options[0])
+  // State to hold the current tarot deck
+  const [tarotDeck, setTarotDeck] = useState(null);
+  // State to hold the currently drawn card
   const [card, setCard] = useState(null);
 
-  // On mount + whenever selectedDeck changes
+  // initialize (or re-init) whenever selectedDeck changes
   useEffect(() => {
-    // save deck choice
-    localStorage.setItem(STORAGE_KEY, selectedDeck.key);
+    setTarotDeck(getDeck(selectedDeck.key))
+    setCard(null)
+  }, [selectedDeck])
 
-    // restore deck order if present
-    const saved = localStorage.getItem(ORDER_KEY(selectedDeck.key));
-    const deck = saved ? JSON.parse(saved) : getDeck(selectedDeck.key);
-
-    setTarotDeck(deck);
-
-    // only auto-draw if we actually restored an order
-    if (saved) {
-      setCard(deck[0]);
+  useEffect(() => {
+    if (tarotDeck && !card) {
+      setCard(getCard(tarotDeck));
     }
-    else {
-      setCard(null);
-    }
-  }, [selectedDeck, options]);
+  }, [tarotDeck]);
 
-  // Shuffle -> update state + persist order
+  // Applies a combination of shuffling methods to randomize the tarot deck
   const shuffle = () => {
-    let deckCopy = [...tarotDeck];
-    deckCopy = riffleShuffle(deckCopy);
-    deckCopy = spliceShuffle(deckCopy);
-    deckCopy = stackSuffle(deckCopy);
-
-    setTarotDeck(deckCopy);
-    setCard(null);
-    localStorage.setItem(ORDER_KEY(selectedDeck.key), JSON.stringify(deckCopy));
+    let deck = riffleShuffle(tarotDeck);
+    deck = spliceShuffle(deck);
+    deck = stackSuffle(deck);
+    setTarotDeck(deck); // Updates the shuffled deck in state
   };
 
-  // Draw -> return new top + persist -> move old top to bottom
+  // Draws a single card from the current deck
   const getThisCard = () => {
-    let deckCopy = [...tarotDeck];
-    const drawn = getCard(deckCopy);
-
-    setTarotDeck(deckCopy);
-    setCard(drawn);
-    localStorage.setItem(ORDER_KEY(selectedDeck.key), JSON.stringify(deckCopy));
-  };
-
-  // Reset -> clear saved deck + fresh
-  const reset = () => {
-    localStorage.removeItem(ORDER_KEY(selectedDeck.key));
-
-    const fresh = getDeck(selectedDeck.key);
-    setTarotDeck(fresh);
-    setCard(null);
+    setCard(getCard(tarotDeck)); // Randomly selects a card from the deck
   };
 
   return (
     <>
-      <div>
-        <button onClick={shuffle}>Shuffle</button>
-        <button onClick={getThisCard}>Draw Card</button>
-        <button onClick={reset}>Reset</button>
-        <label>
-          Deck:
-          <select
-            value={selectedDeck.key}
-            onChange={e =>
-              setSelectedDeck(options.find(o => o.key === e.target.value))
-            }
-          >
-            {options.map(o => (
-              <option key={o.key} value={o.key}>
-                {o.label}
-              </option>
-            ))}
+      <div className="deck-selector">
+        <label> Deck:&nbsp;
+          <select value={selectedDeck.key} onChange={e => setSelectedDeck(options.find(o => o.key === e.target.value))} >
+            {options.map(o => (<option key={o.key} value={o.key}>{o.label}</option>))}
           </select>
         </label>
       </div>
-
-      <p className="deck-description">{selectedDeck.description}</p>
-
+      <div className="deck-buttons">
+        <button onClick={() => { setCard(null); shuffle(); getThisCard(); }}>Shuffle</button>
+        <button onClick={getThisCard}>Draw Card</button>
+        <button onClick={() => { setTarotDeck(getDeck(selectedDeck.key)); setCard(null); }}>Reset</button>
+      </div>
       <div className="single-card">
         {card ? (
           <>
-            <Card card={card} imageFolder={selectedDeck.imageFolder} />
+            <DeckStack tarotDeck={tarotDeck} imageFolder={selectedDeck.imageFolder} size={5} />
             <CardDescripition card={card} deck={selectedDeck} />
           </>
         ) : (
@@ -116,5 +64,6 @@ const SingleCard = () => {
     </>
   );
 };
+
 
 export default SingleCard;
