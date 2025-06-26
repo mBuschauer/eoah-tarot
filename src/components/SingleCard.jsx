@@ -45,7 +45,7 @@ export function SingleCard({ selectedDeck }) {
       <div className="single-card">
         {card.length !== 0 ? (
           <>
-            <DeckStack cards={card} imageFolder={selectedDeck.imageFolder} size={5} />
+            <DeckStack cards={card} deck={selectedDeck} size={5} />
             <CardDescripition card={card[0]} deck={selectedDeck} />
           </>
         ) : (

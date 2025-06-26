@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { getTopFive } from '../../utils/scripts.jsx';
 import { CardFlip } from './CardFlip.jsx';
 
-const DeckStack = ({ cards, imageFolder, size = 5 }) => {
+const DeckStack = ({ cards, deck, size = 5 }) => {
   const topFive = cards;
 
   return (
@@ -25,7 +25,7 @@ const DeckStack = ({ cards, imageFolder, size = 5 }) => {
               zIndex: topFive.length - index, // keeps the physical stack order
             }}
           >
-            <CardFlip card={card} imageFolder={imageFolder} top={index === 0}/>
+            <CardFlip card={card} deck={deck} top={index === 0}/>
           </motion.div>
         ))}
       </AnimatePresence>

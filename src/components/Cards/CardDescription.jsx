@@ -42,12 +42,23 @@ const StoryDescripition = ({ card }) => {
   );
 }
 
+const DetailDescripition = ({ card }) => {
+  return (
+    <div className="card-details">
+      <h2>{card.number}: {card.name}</h2>
+      <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
+      <p><strong>{card.suite_detail}: </strong>{card.detail}</p>
+    </div>
+  );
+}
 
 const CardDescripition = ({ card, deck }) => {
 
   var content = <TarotDescripition card={card} />
   if (deck.key === 'storytarot') {
     content = <StoryDescripition card={card} />
+  } else if (deck.key === 'detailtarotdeck') {
+    content = <DetailDescripition card={card} />
   }
 
   return (

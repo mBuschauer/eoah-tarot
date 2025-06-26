@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CardFlip.css';
 
-export const CardFlip = ({ card, imageFolder, top = false }) => {
+export const CardFlip = ({ card, deck, top = false }) => {
   const [flipped, setFlipped] = useState(false);
   const [disableTransition, setDisableTransition] = useState(false);
 
@@ -25,12 +25,12 @@ export const CardFlip = ({ card, imageFolder, top = false }) => {
       >
         <img
           className="card-face card-back"
-          src={`./images/${imageFolder}/tarot-card-back.JPG`}
-          alt="Card Back"
+          src={`./images/${deck.imageFolder}/${deck.back_face}`}
+          alt="Card Back" 
         />
         <img
           className="card-face card-front"
-          src={`./images/${imageFolder}/${card.img}`}
+          src={`./images/${deck.imageFolder}/${card.img}`}
           alt={card.name}
         />
       </div>

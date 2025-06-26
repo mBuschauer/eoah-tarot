@@ -1,0 +1,55 @@
+.small-card-container {
+    padding-left: 6px;
+    padding-right: 6px;
+
+    text-align: center;
+}
+
+.small-card-face {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.small-card-face:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 4px rgba(0, 0, 0, 0.4);
+}
+
+.small-card-label {
+    padding-bottom: 0px;
+}
+
+
+.small-card-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.small-card-overlay-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.small-card-overlay-content button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
