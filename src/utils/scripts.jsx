@@ -72,16 +72,15 @@ export const renderKeywords = (card) => {
 }
 
 export const getCard = (deck) => {
-    // nothing to draw - just bail out
+    // nothing to draw
     if (!deck || deck.length === 0) return null;
 
-    // take the top card
-    const [card] = deck.splice(0, 1);
+    // move the current top card to the bottom
+    const firstCard = deck.splice(0, 1)[0];
+    deck.push(firstCard);
 
-    // and put it on the bottom so the deck never empties
-    deck.push(card);
-
-    return card;
+    // return the new top card
+    return deck[0];
 };
 
 export const getSpread = (deck, num) => {
