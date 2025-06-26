@@ -4,4 +4,4 @@ This project is an updated and customized version of [AaronTheBruce/Tarot](https
 ## ToDo
 - [x] Basic Functionality
 - [x] Custom Decks
-- [ ] Prettify Everything
+- [x] Prettify Everything
