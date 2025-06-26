@@ -11,7 +11,7 @@ export const deckList = [
     description: DefaultTarot.description, 
   },
   { 
-    key: 'marcotarot', 
+    key: 'storytarot', 
     label: 'Story Cards', 
     data: MarcoOptions.cards, 
     imageFolder: 'tarot-cards', 

@@ -46,7 +46,7 @@ const StoryDescripition = ({ card }) => {
 const CardDescripition = ({ card, deck }) => {
 
   var content = <TarotDescripition card={card} />
-  if (deck.key === 'marcotarot') {
+  if (deck.key === 'storytarot') {
     content = <StoryDescripition card={card} />
   }
 

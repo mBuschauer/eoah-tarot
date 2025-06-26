@@ -17,63 +17,62 @@ const ORDER_KEY = key => `tarotDeckOrder-${key}`;
 const SingleCard = () => {
   const options = getDeckOptions();
 
-  // Load selectedDeck key from localStorage (or default)
+  // Load selectedDeck (persisted) or default
   const [selectedDeck, setSelectedDeck] = useState(() => {
     const savedKey = localStorage.getItem(STORAGE_KEY);
     return options.find(o => o.key === savedKey) || options[0];
   });
 
-  // tarotDeck + card state
+  // Deck state + drawn card
   const [tarotDeck, setTarotDeck] = useState([]);
   const [card, setCard] = useState(null);
 
-  // On mount & whenever selectedDeck changes:
+  // On mount + whenever selectedDeck changes
   useEffect(() => {
-    // persist deck choice
+    // save deck choice
     localStorage.setItem(STORAGE_KEY, selectedDeck.key);
 
-    // load saved deck order? else fresh
-    const savedOrder = localStorage.getItem(ORDER_KEY(selectedDeck.key));
-    const deck = savedOrder
-      ? JSON.parse(savedOrder)
-      : getDeck(selectedDeck.key);
+    // restore deck order if present
+    const saved = localStorage.getItem(ORDER_KEY(selectedDeck.key));
+    const deck = saved ? JSON.parse(saved) : getDeck(selectedDeck.key);
 
     setTarotDeck(deck);
 
-    // if we restored from storage, auto-load top card
-    if (savedOrder) {
+    // only auto-draw if we actually restored an order
+    if (saved) {
       setCard(deck[0]);
-    } else {
+    }
+    else {
       setCard(null);
     }
   }, [selectedDeck, options]);
 
-  // Persist deck order anytime it changes
-  useEffect(() => {
-    localStorage.setItem(ORDER_KEY(selectedDeck.key), JSON.stringify(tarotDeck));
-  }, [tarotDeck, selectedDeck.key]);
-
-  // Shuffle methods all return a mutated array; clone to trigger React update
+  // Shuffle -> update state + persist order
   const shuffle = () => {
-    let deck = riffleShuffle(tarotDeck);
-    deck = spliceShuffle(deck);
-    deck = stackSuffle(deck);
-    setTarotDeck([...deck]);
+    let deckCopy = [...tarotDeck];
+    deckCopy = riffleShuffle(deckCopy);
+    deckCopy = spliceShuffle(deckCopy);
+    deckCopy = stackSuffle(deckCopy);
+
+    setTarotDeck(deckCopy);
     setCard(null);
+    localStorage.setItem(ORDER_KEY(selectedDeck.key), JSON.stringify(deckCopy));
   };
 
-  // Draw using our patched getCard
+  // Draw -> return new top + persist -> move old top to bottom
   const getThisCard = () => {
-    const drawn = getCard(tarotDeck);
-    setTarotDeck([...tarotDeck]);
+    let deckCopy = [...tarotDeck];
+    const drawn = getCard(deckCopy);
+
+    setTarotDeck(deckCopy);
     setCard(drawn);
+    localStorage.setItem(ORDER_KEY(selectedDeck.key), JSON.stringify(deckCopy));
   };
 
-  // RESET: clear order and re-init
+  // Reset -> clear saved deck + fresh
   const reset = () => {
     localStorage.removeItem(ORDER_KEY(selectedDeck.key));
 
-    // fresh deck for the same selectedDeck
     const fresh = getDeck(selectedDeck.key);
     setTarotDeck(fresh);
     setCard(null);
@@ -85,9 +84,19 @@ const SingleCard = () => {
         <button onClick={shuffle}>Shuffle</button>
         <button onClick={getThisCard}>Draw Card</button>
         <button onClick={reset}>Reset</button>
-        <label> Deck:
-          <select value={selectedDeck.key} onChange={e => setSelectedDeck(options.find(o => o.key === e.target.value)) } >
-            {options.map(o => (<option key={o.key} value={o.key}>{o.label}</option>))}
+        <label>
+          Deck:
+          <select
+            value={selectedDeck.key}
+            onChange={e =>
+              setSelectedDeck(options.find(o => o.key === e.target.value))
+            }
+          >
+            {options.map(o => (
+              <option key={o.key} value={o.key}>
+                {o.label}
+              </option>
+            ))}
           </select>
         </label>
       </div>
