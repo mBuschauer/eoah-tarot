@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { getTopFive } from '../utils/scripts.jsx';
-import { Card } from './Card.jsx';
+import { getTopFive } from '../../utils/scripts.jsx';
+import { CardFlip } from './CardFlip.jsx';
 
 const DeckStack = ({ cards, imageFolder, size = 5 }) => {
   const topFive = cards;
@@ -25,7 +25,7 @@ const DeckStack = ({ cards, imageFolder, size = 5 }) => {
               zIndex: topFive.length - index, // keeps the physical stack order
             }}
           >
-            <Card card={card} imageFolder={imageFolder} top={index === 0}/>
+            <CardFlip card={card} imageFolder={imageFolder} top={index === 0}/>
           </motion.div>
         ))}
       </AnimatePresence>

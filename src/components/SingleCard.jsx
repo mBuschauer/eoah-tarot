@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getDeckOptions, getDeck, getCard, spliceShuffle, stackSuffle, riffleShuffle, getTopFive } from '../utils/scripts.jsx';
-import CardDescripition from './CardDescription.jsx';
+import { getDeck, spliceShuffle, stackSuffle, riffleShuffle, getTopFive } from '../utils/scripts.jsx';
+import CardDescripition from './Cards/CardDescription.jsx';
 import './SingleCard.css'
-import DeckStack from './DeckStack.jsx';
+import DeckStack from './Cards/DeckStack.jsx';
 
-const SingleCard = () => {
-  const options = getDeckOptions()
-  const [selectedDeck, setSelectedDeck] = useState(options[0])
+export function SingleCard({ selectedDeck }) {
   // State to hold the current tarot deck
   const [tarotDeck, setTarotDeck] = useState(null);
   // State to hold the currently drawn card
@@ -39,13 +37,6 @@ const SingleCard = () => {
 
   return (
     <>
-      <div className="deck-selector">
-        <label> Deck:&nbsp;
-          <select value={selectedDeck.key} onChange={e => setSelectedDeck(options.find(o => o.key === e.target.value))} >
-            {options.map(o => (<option key={o.key} value={o.key}>{o.label}</option>))}
-          </select>
-        </label>
-      </div>
       <div className="deck-buttons">
         <button onClick={() => { setCard([]); shuffle(); getThisCard(); }}>Shuffle</button>
         <button onClick={getThisCard}>Draw Card</button>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './Card.css';
-export const Card = ({ card, imageFolder, top = false }) => {
+import './CardFlip.css';
+
+export const CardFlip = ({ card, imageFolder, top = false }) => {
   const [flipped, setFlipped] = useState(false);
   const [disableTransition, setDisableTransition] = useState(false);
 
@@ -19,9 +20,8 @@ export const Card = ({ card, imageFolder, top = false }) => {
   return (
     <div className="card-container">
       <div
-        className={`card-flipper ${flipped ? 'flipped' : ''} ${
-          disableTransition ? 'no-transition' : ''
-        }`}
+        className={`card-flipper ${flipped ? 'flipped' : ''} ${disableTransition ? 'no-transition' : ''
+          }`}
       >
         <img
           className="card-face card-back"

@@ -71,19 +71,6 @@ export const renderKeywords = (card) => {
     return keywordString.trim();
 }
 
-export const getCard = (deck) => {
-    // nothing to draw - just bail out
-    if (!deck || deck.length === 0) return null;
-
-    // take the top card
-    const [card] = deck.splice(0, 1);
-
-    // and put it on the bottom so the deck never empties
-    deck.push(card);
-
-    return card;
-};
-
 export const getTopFive = (deck, n = 5) => {
   if (!deck || deck.length === 0) return [];
   // how many cards we can actually read
