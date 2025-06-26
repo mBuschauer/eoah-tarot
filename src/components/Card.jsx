@@ -21,12 +21,12 @@ const Card = ({ card, imageFolder }) => {
       <div className={`card-flipper ${flipped ? 'flipped' : ''} ${disableTransition ? 'no-transition' : ''}`}>
         <img
           className="card-face card-back"
-          src={`/images/${imageFolder}/tarot-card-back.JPG`}
+          src={`./images/${imageFolder}/tarot-card-back.JPG`}
           alt="Card Back"
         />
         <img
           className="card-face card-front"
-          src={`/images/${imageFolder}/${card.img}`}
+          src={`./images/${imageFolder}/${card.img}`}
           alt={card.name}
         />
       </div>
