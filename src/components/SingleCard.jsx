@@ -45,7 +45,15 @@ const SingleCard = () => {
       </div>
       <p className="deck-description">{selectedDeck.description}</p>
       <div className="single-card">
-        {card ? (<><Card card={card} imageFolder={selectedDeck.imageFolder} /> <CardDescripition card={card} /></>) : (<p>Cards are in order by default; Shuffle and Draw a Card.</p>)}
+        {
+          card ? 
+            (<>
+              <Card card={card} imageFolder={selectedDeck.imageFolder} /> 
+              <CardDescripition card={card} deck={selectedDeck}/>
+            </>) 
+            : 
+            (<p>Cards are in order by default; Shuffle and Draw a Card.</p>)
+        }
       </div>
     </>
   );

@@ -4,8 +4,8 @@ export const getDeckOptions = () => deckList;
 
 // look up by key, falling back to the first one
 export const getDeck = (deckKey = deckList[0].key) => {
-  const deckObj = deckList.find(d => d.key === deckKey) || deckList[0]
-  return Object.values(deckObj.data)
+    const deckObj = deckList.find(d => d.key === deckKey) || deckList[0]
+    return Object.values(deckObj.data)
 }
 
 // Fisher-Yates Shuffle
@@ -37,13 +37,13 @@ export const riffleShuffle = (deck) => {
     const leftHalf = deck.splice(0, cutDeckVariant);
     // Keep the right half upright for the first iteration
     deck.map(card => {
-        if(card.inverted === true) card.inverted = false;
-        if(card.inverted === false) card.inverted = true;
+        if (card.inverted === true) card.inverted = false;
+        if (card.inverted === false) card.inverted = true;
     });
     // flip leftHalf of the deck 'upside down'
     leftHalf.map(card => {
-        if(card.inverted === false) card.inverted = true;
-        if(card.inverted === true) card.inverted = false;
+        if (card.inverted === false) card.inverted = true;
+        if (card.inverted === true) card.inverted = false;
     })
     let leftCount = leftHalf.length;
     // specify the contents of the Right Half
@@ -72,10 +72,17 @@ export const renderKeywords = (card) => {
 }
 
 export const getCard = (deck) => {
-    // gets the first card on top of the deck and removes it from the deck
-    let drawnCard = deck.splice(0, 1);
-    return drawnCard[0];
-}
+    // nothing to draw - just bail out
+    if (!deck || deck.length === 0) return null;
+
+    // take the top card
+    const [card] = deck.splice(0, 1);
+
+    // and put it on the bottom so the deck never empties
+    deck.push(card);
+
+    return card;
+};
 
 export const getSpread = (deck, num) => {
     let thisSpread = [];

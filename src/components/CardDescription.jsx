@@ -1,22 +1,69 @@
-import React from 'react';
-import { renderKeywords } from '../utils/scripts.jsx';
+import React, { useEffect }  from 'react';
 import './CardDescription.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const CardDescripition = ({ card }) => {
+const renderKeywords = (card) => {
+  const keywords = card.keywords;
+  let keywordString = '';
+  for (let i = 0; i < keywords.length; i++) {
+    let keyword = keywords[i];
+    if (i === keywords.length - 1) keywordString += keyword;
+    else keywordString += keyword + ', '
+  }
+  return keywordString.trim();
+}
+
+
+const TarotDescripition = ({ card }) => {
   return (
-      <div className="card-details">
-        <h2>{card.number}: {card.name}</h2>
-        <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
-          <h3>Light:</h3>
-          <ul>{card.meanings.light.map(item => <li key={item}>{item}</li>)}</ul>
+    <div className="card-details">
+      <h2>{card.number}: {card.name}</h2>
+      <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
+      <h3>Light:</h3>
+      <ul>{card.meanings.light.map(item => <li key={item}>{item}</li>)}</ul>
 
-          <h3>Shadow:</h3>
-          <ul>{card.meanings.shadow.map(item => <li key={item}>{item}</li>)}</ul>
+      <h3>Shadow:</h3>
+      <ul>{card.meanings.shadow.map(item => <li key={item}>{item}</li>)}</ul>
 
-          <h3>Questions to Ask Yourself:</h3>
-          <ul>{card.QuestionsToAsk.map(item => <li key={item}>{item}</li>)}</ul>
-      </div>
+      <h3>Questions to Ask Yourself:</h3>
+      <ul>{card.QuestionsToAsk.map(item => <li key={item}>{item}</li>)}</ul>
+    </div>
   );
+}
+
+const StoryDescripition = ({ card }) => {
+  return (
+    <div className="card-details">
+      <h2>{card.number}: {card.name}</h2>
+      <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
+      <h3>Story:</h3>
+      <p><strong>{card.story}:</strong> {card.story_description}</p>
+    </div>
+  );
+}
+
+
+const CardDescripition = ({ card, deck }) => {
+
+  var content = <TarotDescripition card={card} />
+  if (deck.key === 'marcotarot') {
+    content = <StoryDescripition card={card} />
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={`${deck.key}-${card.name}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}
+      >
+        {content}
+      </motion.div>
+    </AnimatePresence>
+  );
+
 };
 
 export default CardDescripition;
