@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { getTopFive } from '../utils/scripts.jsx';
 import { Card } from './Card.jsx';
 
-const DeckStack = ({ tarotDeck, imageFolder, size = 5 }) => {
-  const topFive = getTopFive([...tarotDeck], size);
+const DeckStack = ({ cards, imageFolder, size = 5 }) => {
+  const topFive = cards;
 
   return (
     <div className="deck-stack-container" style={{ position: 'relative', width: '300px', height: '512px' }}>

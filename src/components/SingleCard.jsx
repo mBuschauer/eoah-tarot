@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDeckOptions, getDeck, getCard, spliceShuffle, stackSuffle, riffleShuffle, renderKeywords } from '../utils/scripts.jsx';
+import { getDeckOptions, getDeck, getCard, spliceShuffle, stackSuffle, riffleShuffle, getTopFive } from '../utils/scripts.jsx';
 import CardDescripition from './CardDescription.jsx';
 import './SingleCard.css'
 import DeckStack from './DeckStack.jsx';
@@ -10,17 +10,17 @@ const SingleCard = () => {
   // State to hold the current tarot deck
   const [tarotDeck, setTarotDeck] = useState(null);
   // State to hold the currently drawn card
-  const [card, setCard] = useState(null);
+  const [card, setCard] = useState([]);
 
   // initialize (or re-init) whenever selectedDeck changes
   useEffect(() => {
     setTarotDeck(getDeck(selectedDeck.key))
-    setCard(null)
+    setCard([])
   }, [selectedDeck])
 
   useEffect(() => {
-    if (tarotDeck && !card) {
-      setCard(getCard(tarotDeck));
+    if (tarotDeck && card.length === 0) {
+      setCard(getTopFive(tarotDeck));
     }
   }, [tarotDeck]);
 
@@ -34,7 +34,7 @@ const SingleCard = () => {
 
   // Draws a single card from the current deck
   const getThisCard = () => {
-    setCard(getCard(tarotDeck)); // Randomly selects a card from the deck
+    setCard(getTopFive(tarotDeck));
   };
 
   return (
@@ -47,15 +47,15 @@ const SingleCard = () => {
         </label>
       </div>
       <div className="deck-buttons">
-        <button onClick={() => { setCard(null); shuffle(); getThisCard(); }}>Shuffle</button>
+        <button onClick={() => { setCard([]); shuffle(); getThisCard(); }}>Shuffle</button>
         <button onClick={getThisCard}>Draw Card</button>
-        <button onClick={() => { setTarotDeck(getDeck(selectedDeck.key)); setCard(null); }}>Reset</button>
+        <button onClick={() => { setTarotDeck(getDeck(selectedDeck.key)); setCard([]); }}>Reset</button>
       </div>
       <div className="single-card">
-        {card ? (
+        {card.length !== 0 ? (
           <>
-            <DeckStack tarotDeck={tarotDeck} imageFolder={selectedDeck.imageFolder} size={5} />
-            <CardDescripition card={card} deck={selectedDeck} />
+            <DeckStack cards={card} imageFolder={selectedDeck.imageFolder} size={5} />
+            <CardDescripition card={card[0]} deck={selectedDeck} />
           </>
         ) : (
           <p>Cards are in order by default; Shuffle and Draw a Card.</p>

@@ -86,12 +86,20 @@ export const getCard = (deck) => {
 
 export const getTopFive = (deck, n = 5) => {
   if (!deck || deck.length === 0) return [];
+  // how many cards we can actually read
   const count = Math.min(n, deck.length);
-  // remove the top `count` cards
-  const topFive = deck.splice(0, count);
-  // push only the first card back onto the bottom
-  if (topFive.length > 0) deck.push(topFive[0]);
-  return topFive;
+
+  // “read” (slice) the top `count` cards without removing them
+  const topCards = deck.slice(0, count);
+
+  // now remove the very first card and push it to the bottom
+  // (this mutates deck in-place)
+  if (deck.length > 0) {
+    const first = deck.shift();
+    deck.push(first);
+  }
+
+  return topCards;
 };
 
 export const getSpread = (deck, num) => {
