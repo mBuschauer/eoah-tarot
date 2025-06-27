@@ -59,6 +59,8 @@ const CardDescripition = ({ card, deck }) => {
     content = <StoryDescripition card={card} />
   } else if (deck.key === 'detailtarotdeck') {
     content = <DetailDescripition card={card} />
+  } else if (deck.key === 'playingcards') {
+    content = <></>
   }
 
   return (

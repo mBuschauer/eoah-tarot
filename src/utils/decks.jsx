@@ -2,6 +2,7 @@
 import DefaultTarot from '../data/default-tarot.json'
 import StoryTarot from '../data/story-tarot.json'
 import DetailTarot from '../data/detail-tarot.json'
+import PlayingCards from '../data/playing-cards.json'
 
 export const deckList = [
   {
@@ -39,5 +40,14 @@ export const deckList = [
     description: DetailTarot.description,
     spread_type: 'single',
     back_face: 'tarot-card-back.JPG',
+  },
+  {
+    key: 'playingcards',
+    label: 'Playing Card',
+    data: PlayingCards.cards,
+    imageFolder: 'playing-cards',
+    description: PlayingCards.description,
+    spread_type: 'single',
+    back_face: 'Card_back_01.svg',
   },
 ]

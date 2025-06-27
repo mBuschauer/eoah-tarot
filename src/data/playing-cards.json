@@ -1,0 +1,265 @@
+{
+    "description": "Normal Playing Cards",
+    "cards": [
+        {
+            "name": "Ace of Clubs",
+            "number": "0",
+            "img": "ace_of_clubs.svg"
+        },
+        {
+            "name": "Two of Clubs",
+            "number": "1",
+            "img": "2_of_clubs.svg"
+        },
+        {
+            "name": "Three of Clubs",
+            "number": "2",
+            "img": "3_of_clubs.svg"
+        },
+        {
+            "name": "Four of Clubs",
+            "number": "3",
+            "img": "4_of_clubs.svg"
+        },
+        {
+            "name": "Five of Clubs",
+            "number": "4",
+            "img": "5_of_clubs.svg"
+        },
+        {
+            "name": "Six of Clubs",
+            "number": "5",
+            "img": "6_of_clubs.svg"
+        },
+        {
+            "name": "Seven of Clubs",
+            "number": "6",
+            "img": "7_of_clubs.svg"
+        },
+        {
+            "name": "Eight of Clubs",
+            "number": "7",
+            "img": "8_of_clubs.svg"
+        },
+        {
+            "name": "Nine of Clubs",
+            "number": "8",
+            "img": "9_of_clubs.svg"
+        },
+        {
+            "name": "Ten of Clubs",
+            "number": "9",
+            "img": "10_of_clubs.svg"
+        },
+        {
+            "name": "Jack of Clubs",
+            "number": "10",
+            "img": "jack_of_clubs2.svg"
+        },
+        {
+            "name": "Queen of Clubs",
+            "number": "11",
+            "img": "queen_of_clubs2.svg"
+        },
+        {
+            "name": "King of Clubs",
+            "number": "12",
+            "img": "king_of_clubs2.svg"
+        },
+        {
+            "name": "Ace of Diamonds",
+            "number": "13",
+            "img": "ace_of_diamonds.svg"
+        },
+        {
+            "name": "Two of Diamonds",
+            "number": "14",
+            "img": "2_of_diamonds.svg"
+        },
+        {
+            "name": "Three of Diamonds",
+            "number": "15",
+            "img": "3_of_diamonds.svg"
+        },
+        {
+            "name": "Four of Diamonds",
+            "number": "16",
+            "img": "4_of_diamonds.svg"
+        },
+        {
+            "name": "Five of Diamonds",
+            "number": "17",
+            "img": "5_of_diamonds.svg"
+        },
+        {
+            "name": "Six of Diamonds",
+            "number": "18",
+            "img": "6_of_diamonds.svg"
+        },
+        {
+            "name": "Seven of Diamonds",
+            "number": "19",
+            "img": "7_of_diamonds.svg"
+        },
+        {
+            "name": "Eight of Diamonds",
+            "number": "20",
+            "img": "8_of_diamonds.svg"
+        },
+        {
+            "name": "Nine of Diamonds",
+            "number": "21",
+            "img": "9_of_diamonds.svg"
+        },
+        {
+            "name": "Ten of Diamonds",
+            "number": "22",
+            "img": "10_of_diamonds.svg"
+        },
+        {
+            "name": "Jack of Diamonds",
+            "number": "23",
+            "img": "jack_of_diamonds2.svg"
+        },
+        {
+            "name": "Queen of Diamonds",
+            "number": "24",
+            "img": "queen_of_diamonds2.svg"
+        },
+        {
+            "name": "King of Diamonds",
+            "number": "25",
+            "img": "king_of_diamonds2.svg"
+        },
+        {
+            "name": "Ace of Hearts",
+            "number": "26",
+            "img": "ace_of_hearts.svg"
+        },
+        {
+            "name": "Two of Hearts",
+            "number": "27",
+            "img": "2_of_hearts.svg"
+        },
+        {
+            "name": "Three of Hearts",
+            "number": "28",
+            "img": "3_of_hearts.svg"
+        },
+        {
+            "name": "Four of Hearts",
+            "number": "29",
+            "img": "4_of_hearts.svg"
+        },
+        {
+            "name": "Five of Hearts",
+            "number": "30",
+            "img": "5_of_hearts.svg"
+        },
+        {
+            "name": "Six of Hearts",
+            "number": "31",
+            "img": "6_of_hearts.svg"
+        },
+        {
+            "name": "Seven of Hearts",
+            "number": "32",
+            "img": "7_of_hearts.svg"
+        },
+        {
+            "name": "Eight of Hearts",
+            "number": "33",
+            "img": "8_of_hearts.svg"
+        },
+        {
+            "name": "Nine of Hearts",
+            "number": "34",
+            "img": "9_of_hearts.svg"
+        },
+        {
+            "name": "Ten of Hearts",
+            "number": "35",
+            "img": "10_of_hearts.svg"
+        },
+        {
+            "name": "Jack of Hearts",
+            "number": "36",
+            "img": "jack_of_hearts2.svg"
+        },
+        {
+            "name": "Queen of Hearts",
+            "number": "37",
+            "img": "queen_of_hearts2.svg"
+        },
+        {
+            "name": "King of Hearts",
+            "number": "38",
+            "img": "king_of_hearts2.svg"
+        },
+                {
+            "name": "Ace of Spades",
+            "number": "39",
+            "img": "ace_of_spades.svg"
+        },
+        {
+            "name": "Two of Spades",
+            "number": "40",
+            "img": "2_of_spades.svg"
+        },
+        {
+            "name": "Three of Spades",
+            "number": "41",
+            "img": "3_of_spades.svg"
+        },
+        {
+            "name": "Four of Spades",
+            "number": "42",
+            "img": "4_of_spades.svg"
+        },
+        {
+            "name": "Five of Spades",
+            "number": "43",
+            "img": "5_of_spades.svg"
+        },
+        {
+            "name": "Six of Spades",
+            "number": "44",
+            "img": "6_of_spades.svg"
+        },
+        {
+            "name": "Seven of Spades",
+            "number": "45",
+            "img": "7_of_spades.svg"
+        },
+        {
+            "name": "Eight of Spades",
+            "number": "46",
+            "img": "8_of_spades.svg"
+        },
+        {
+            "name": "Nine of Spades",
+            "number": "47",
+            "img": "9_of_spades.svg"
+        },
+        {
+            "name": "Ten of Spades",
+            "number": "48",
+            "img": "10_of_spades.svg"
+        },
+        {
+            "name": "Jack of Spades",
+            "number": "49",
+            "img": "jack_of_spades2.svg"
+        },
+        {
+            "name": "Queen of Spades",
+            "number": "50",
+            "img": "queen_of_spades2.svg"
+        },
+        {
+            "name": "King of Spades",
+            "number": "51",
+            "img": "king_of_spades2.svg"
+        }
+    ]
+}

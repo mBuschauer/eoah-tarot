@@ -11,7 +11,7 @@ const inputPath = join(__dirname, 'detail-tarot.json');
 const outputPath = join(__dirname, 'detail-tarot-1.json');
 
 // Fields to remove
-const fieldsToRemove = ['inverted', 'fortune_telling', 'meanings', 'Numerology', 'Astrology', 'Affirmation', 'QuestionsToAsk' ];
+const fieldsToRemove = ['inverted', 'fortune_telling', 'meanings', 'Numerology', 'Astrology', 'Affirmation', 'QuestionsToAsk'];
 
 const run = async () => {
   try {
