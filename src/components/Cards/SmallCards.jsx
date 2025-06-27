@@ -24,16 +24,35 @@ export function SmallCard({ card, imageFolder, onClick }) {
 }
 
 
-export function SmallDetail({ card, onClose }) {
+export function SmallDetail({ card, selectedDeck, onClose }) {
     if (!card) return null;
-    return (<>
-        <div className="small-card-overlay" onClick={onClose}>
-            <div className="small-card-overlay-content" onClick={e => e.stopPropagation()}>
-                <h2>{card.number}: {card.name}</h2>
-                <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
-                <p><strong>{card.suite_detail}: </strong>{card.detail}</p>
-                <button onClick={onClose}>Close</button>
+
+    if (selectedDeck.key === 'storytarotspread') {
+        return (
+            <>
+                <div className="small-card-overlay" onClick={onClose}>
+                    <div className="small-card-overlay-content" onClick={e => e.stopPropagation()}>
+                        <h2>{card.number}: {card.name}</h2>
+                        <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
+                        <p><strong>{card.story}</strong><br />{card.story_description}</p>
+                        <button onClick={onClose}>Close</button>
+                    </div>
+                </div>
+            </>
+        );
+    }
+    if (selectedDeck.key === 'detailtarotspread') {
+        return (<>
+            <div className="small-card-overlay" onClick={onClose}>
+                <div className="small-card-overlay-content" onClick={e => e.stopPropagation()}>
+                    <h2>{card.number}: {card.name}</h2>
+                    <p><strong>Keywords:</strong> {renderKeywords(card)}</p>
+                    <p><strong>{card.suite_detail}: </strong>{card.detail}</p>
+                    <button onClick={onClose}>Close</button>
+                </div>
             </div>
-        </div>
-    </>);
+        </>);
+    }
+
+    return null;
 }  

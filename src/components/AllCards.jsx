@@ -18,7 +18,7 @@ export function AllCards({ selectedDeck }) {
                 ))}
             </div>
 
-            <SmallDetail card={selected} onClose={() => setSelected(null)} />
+            <SmallDetail card={selected} selectedDeck={selectedDeck} onClose={() => setSelected(null)} />
         </div>
     );
 }

@@ -23,6 +23,15 @@ export const deckList = [
     spread_type: 'single',
     back_face: 'tarot-card-back.JPG',
   },
+    {
+    key: 'storytarotspread',
+    label: 'Story Card Spread',
+    data: StoryTarot.cards,
+    imageFolder: 'tarot-cards',
+    description: StoryTarot.description,
+    spread_type: 'all',
+    back_face: 'tarot-card-back.JPG',
+  },
   {
     key: 'detailtarotspread',
     label: 'Detail Spread',
